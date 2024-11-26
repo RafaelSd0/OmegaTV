@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { AuthService, User } from '@auth0/auth0-angular';
 import { RouterLinkActive } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-header',
   standalone: true,

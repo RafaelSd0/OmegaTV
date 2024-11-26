@@ -3,7 +3,7 @@
   <p-toolbar  >
     <div class="p-toolbar-group-start" >
       <a href="/home" routerLinkActive="active">
-        <img  src="https://github.com/RafaelSd0/OmegaTV/blob/master/public/Captura%20de%20tela%202024-11-26%20165112.png?raw=true"
+        <img  src="Captura de tela 2024-11-26 165112.png"
       alt="image"
       class="h-11">
       </a>
@@ -13,17 +13,15 @@
   </div>
   <div class="p-toolbar-group-end flex gap-5 " >
 
-    <p-button
+    <button
     *ngIf="!(auth.isAuthenticated$ | async)"
     (click)="login()"
-    label="Entrar"
-    class=" bg-blue-500 rounded-md py-2 px-3 text-white "></p-button>
+    class=" bg-blue-500 rounded-md py-2 px-3 text-white ">Entrar</button>
 
-    <p-button
+    <button
     *ngIf="auth.isAuthenticated$ | async"
     (click)="logout()"
-    label="Sair"
-    class=" bg-red-600 rounded-md py-2 px-3 text-white "></p-button>
+    class=" bg-red-600 rounded-md py-2 px-3 text-white ">Sair</button>
 
     <div *ngIf="auth.user$ | async as user" >
       <img [src]="profile?.picture" alt="{{ profile?.name }}" class=" rounded-full h-8" />

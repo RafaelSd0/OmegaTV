@@ -15,6 +15,17 @@
   }
   input{
     border-radius: 70px;
+
+  }
+  .p-inputtext:focus {
+    border-color: #8b5cf6; /* Borda roxa */
+    box-shadow: 0 0 0 0.2rem rgb(124, 85, 215); /* Sombra roxa */
+  }
+  .p-button{
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
   }
 }
 
