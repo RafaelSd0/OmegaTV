@@ -10,7 +10,7 @@
 /* Reset CSS */
 @layer reset {
   .p-toolbar {
-    background-color: #161515;
+    background-color: #000;
     border-radius: 0%;
   }
   input{
