@@ -9,8 +9,16 @@
 
 /* Reset CSS */
 @layer reset {
-    button,
-    input {
-        /* CSS to Reset */
-    }
+  .p-toolbar {
+    background-color: #161515;
+    border-radius: 0%;
+  }
+  input{
+    border-radius: 70px;
+  }
+}
+
+.size{
+  padding-left: 10%;
+  padding-right: 10%;
 }
