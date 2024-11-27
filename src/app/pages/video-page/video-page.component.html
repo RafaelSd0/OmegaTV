@@ -1,11 +1,21 @@
-<video *ngIf="video" controls>
+<video *ngIf="video" controls class="w-full">
   <source [src]="video.url" type="video/mp4">
   Seu navegador não suporta o elemento de vídeo.
 </video>
-<div class="size text-white">
-  <h1>{{video.title}}</h1>
-  <p>{{video.description}}</p>
-  <p>{{video.views}}</p>
-  <p>{{video.uploadedAt}}</p>
+<div class="size text-white pb-10">
+  <br>
+  <h1 class="  text-xl sm:text-2xl md:text-3xl xl:text-4xl">{{video.title}}</h1>
+  <br>
+  <div class=" bg-slate-900 rounded w-full py-3">
+    <p class=" pl-5 text-base sm:text-sm md:text-md xl:text-lg">{{video.description}}</p>
+    <br>
+    <p class="pl-5 text-base sm:text-sm md:text-md xl:text-lg">Visualizações: {{video.views}} </p>
+    <p class="pl-5 text-base sm:text-sm md:text-md xl:text-lg">Data de Upload: {{video.uploadedAt}}</p>
+  </div>
+
+
+
+
+
 </div>
 
