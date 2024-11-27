@@ -1,1 +1,26 @@
-<p>home works!</p>
+
+<div class="size">
+
+
+<div *ngIf="videos.length > 0; else loading">
+  <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+    <li *ngFor="let video of videos" >
+      <a [routerLink]="'/video'" (click)="setVideo(video)">
+        <div>
+          <div class="w-80 h-44 overflow-hidden rounded-lg flex justify-center items-center">
+            <img src="{{video.thumbnail}}" alt="thumbnail" class="w-full h-auto">
+          </div>
+          <h3 class="font-bold">{{ video.title }}</h3>
+          <p class="text-xs">{{ video.description }}</p>
+        </div>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<ng-template #loading>
+  <p>Carregando vídeos...</p>
+</ng-template>
+
+</div>
+

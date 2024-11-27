@@ -30,6 +30,13 @@
 }
 
 .size{
-  padding-left: 10%;
-  padding-right: 10%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+
+
+body{
+  background-color: #1E1E1E;
+  color: white;
 }
