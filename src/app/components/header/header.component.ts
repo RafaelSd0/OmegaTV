@@ -7,6 +7,7 @@ import { AuthService, User } from '@auth0/auth0-angular';
 import { RouterLinkActive } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NavegationService } from '../../navegation.service';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -18,7 +19,7 @@ export class HeaderComponent {
   menuAberto: boolean = false;
   profile!: User | null | undefined;
 
-  constructor(public auth: AuthService, @Inject(DOCUMENT) private document: Document) {}
+  constructor(public auth: AuthService, @Inject(DOCUMENT) private document: Document, private navegationServide:NavegationService) {}
 
   ngOnInit(): void {
 
@@ -50,4 +51,11 @@ export class HeaderComponent {
     menu.classList.toggle('hidden', !this.menuAberto);
     menu.classList.toggle('flex', this.menuAberto);
   }
+
+  setName(event: any): void {
+    const query = (event.target as HTMLInputElement).value;
+    console.log('Nome da pesquisa enviado:', query); // Verificando o valor da pesquisa
+    this.navegationServide.setName(query); // Armazena o nome no serviço
+  }
+
 }

@@ -1,16 +1,28 @@
 import { Injectable } from '@angular/core';
-
+import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class NavegationService {
-  video:any
+  private nameSubject = new BehaviorSubject<string>(''); // Inicializa o nome da pesquisa
+  nameChanged = this.nameSubject.asObservable(); // Observable para ser escutado
 
-  getVideo(): any{
-    return this.video;
+  private video: any;
+
+  setName(name: string): void {
+    console.log('Setando novo nome: ', name); // Adicionando log
+    this.nameSubject.next(name); // Atualiza o valor da pesquisa
   }
 
-  setVideo(video:any): void{
+  getName(): string {
+    return this.nameSubject.getValue(); // Retorna o valor atual
+  }
+
+  setVideo(video: any): void {
     this.video = video;
+  }
+
+  getVideo(): any {
+    return this.video;
   }
 }
