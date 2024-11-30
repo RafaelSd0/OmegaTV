@@ -24,6 +24,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     // Carregar os vídeos quando o componente for inicializado
     this.getVideos()
+    this.navegationService.getFavorites();
+    this.navegationService.getWatchLater();
 
     // Escutar mudanças no nome da pesquisa
     this.pesquisa = this.navegationService.getName(); // Inicializa com o valor atual
@@ -98,52 +100,56 @@ export class HomeComponent implements OnInit {
     this.navegationService.setVideo(video); // Armazena o vídeo no serviço
   }
 
-  filtrarFavoritos(){
+  filtrarFavoritos(): void {
     if (this.isAuthenticated) {
-      this.http.get<any[]>('http://localhost:3000/favorites').subscribe({
-        next: (data) => {
-          this.videos = data; // Armazena os vídeos
-          console.log('Vídeos carregados:', this.videos); // Adicionando log
-          this.pesquisarPorNome(); // Chama a função de filtro logo após carregar os vídeos
-        },
-        error: (err) => {
-          console.error('Erro ao carregar vídeos:', err); // Trata erros
+      this.auth.user$.subscribe(user => {
+        const userId = user?.sub; // Obtém o ID do usuário autenticado
+        if (!userId) {
+          window.alert("Erro: usuário não autenticado.");
+          return;
         }
+
+        // Aguarda a lista de favoritos ser carregada antes de filtrar
+        this.navegationService.getFavorites(); // Certifique-se de que a lista está carregada antes de filtrar
+
+        // Agora filtramos os vídeos com base no usuário autenticado
+        this.videos = this.videos.filter(video =>
+          this.navegationService.listaFavoritos.some(fav =>
+            fav.authId === userId && fav.videoId === video.id
+          )
+        );
+
+        console.log('Vídeos Favoritos do Usuário:', this.videos);
       });
     } else {
-      window.alert("é nessessario fazer login para acessar 'Faforitos' ")
+      window.alert("É necessário fazer login para acessar 'Favoritos'");
     }
   }
 
-  filtrarEmAlta(){
-
-    this.http.get<any[]>('http://localhost:3000/favorites').subscribe({
-      next: (data) => {
-        this.videos = data; // Armazena os vídeos
-        console.log('Vídeos carregados:', this.videos); // Adicionando log
-        this.pesquisarPorNome(); // Chama a função de filtro logo após carregar os vídeos
-      },
-      error: (err) => {
-        console.error('Erro ao carregar vídeos:', err); // Trata erros
-      }
-    });
-
-  }
 
   filtrarMaisTarde(){
     if (this.isAuthenticated) {
-      this.http.get<any[]>('http://localhost:3000/watchLater').subscribe({
-        next: (data) => {
-          this.videos = data; // Armazena os vídeos
-          console.log('Vídeos carregados:', this.videos); // Adicionando log
-          this.pesquisarPorNome(); // Chama a função de filtro logo após carregar os vídeos
-        },
-        error: (err) => {
-          console.error('Erro ao carregar vídeos:', err); // Trata erros
+      this.auth.user$.subscribe(user => {
+        const userId = user?.sub; // Obtém o ID do usuário autenticado
+        if (!userId) {
+          window.alert("Erro: usuário não autenticado.");
+          return;
         }
+
+        // Aguarda a lista de favoritos ser carregada antes de filtrar
+        this.navegationService.getWatchLater(); // Certifique-se de que a lista está carregada antes de filtrar
+
+        // Agora filtramos os vídeos com base no usuário autenticado
+        this.videos = this.videos.filter(video =>
+          this.navegationService.listaAssistir.some(fav =>
+            fav.authId === userId && fav.videoId === video.id
+          )
+        );
+
+        console.log('Vídeos Favoritos do Usuário:', this.videos);
       });
     } else {
-      window.alert("é nessessario fazer login para acessar 'Assistir mais tarde' ")
+      window.alert("É necessário fazer login para acessar 'Assistir mais tarde'");
     }
   }
 

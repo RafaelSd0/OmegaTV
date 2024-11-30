@@ -7,8 +7,8 @@ import { HttpClient } from '@angular/common/http';
 export class NavegationService {
   private nameSubject = new BehaviorSubject<string>(''); // Inicializa o nome da pesquisa
   nameChanged = this.nameSubject.asObservable(); // Observable para ser escutado
-  private listaAssistir: any[] = [];
-  private listaFavoritos: any[] =[];
+  listaAssistir: any[] = [];
+  listaFavoritos: any[] =[];
   private video: any;
 
 
