@@ -11,10 +11,8 @@
   <div>
     <h1 class="  text-xl sm:text-2xl md:text-3xl xl:text-4xl">{{video.title}}</h1>
     <div>
-      <button (click)="favoritar()" *ngIf="!usuarioFavoritou">Favoritar</button>
-      <button (click)="assistirDepois()" *ngIf="!usuarioAssisteDepois">Assistir depois</button>
-      <button (click)="desfavoritar()" *ngIf="usuarioFavoritou">Desfavoritar</button>
-      <button (click)="naoassistirDepois()" *ngIf="usuarioAssisteDepois">Remover de Assistir depois</button>
+      <button (click)="favoritar()" >Favoritar</button>
+      <button (click)="assistirDepois()" >Assistir depois</button>
     </div>
   </div>
   <br>

@@ -18,8 +18,6 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 export class VideoPageComponent implements OnInit {
   private baseUrl = 'http://localhost:3000';
   video: any;
-  usuarioFavoritou: boolean = false;
-  usuarioAssisteDepois: boolean = false;
 
   constructor(
     private navegationService: NavegationService,
@@ -31,6 +29,7 @@ export class VideoPageComponent implements OnInit {
   ngOnInit(): void {
 
     this.video = this.navegationService.getVideo();
+
 
     this.auth.isAuthenticated$.subscribe(isAuthenticated => {
       if (isAuthenticated) {
@@ -46,13 +45,18 @@ export class VideoPageComponent implements OnInit {
 
   // Função para favoritar o vídeo
   favoritar(): void {
-    this.usuarioFavoritou = true;
     this.auth.user$.subscribe(user => {
       const userId = user?.sub; // Obtém o ID do usuário (sub) do Auth0
       if (userId) {
-        this.usuarioFavoritou = true;
         // Adiciona o vídeo aos favoritos
-        this.addItem('favorites', {  'videoId': this.video.id, 'authId': userId });
+        this.addItem('favorites', {  'authId': userId, 'videoId': this.video.id }).subscribe(
+          response => {
+            window.alert('Adicionado à lista de favoritos');
+          },
+          error => {
+            console.log('Erro ao adicionar à lista de favoritos:', error)
+          }
+        )
       }
     });
   }
@@ -62,24 +66,19 @@ export class VideoPageComponent implements OnInit {
     this.auth.user$.subscribe(user => {
       const userId = user?.sub; // Obtém o ID do usuário (sub) do Auth0
       if (userId) {
-        this.usuarioAssisteDepois = true;
         // Adiciona o vídeo à lista "assistir depois"
-        this.addItem('watchLater', {   'videoId': this.video.id, 'authId': userId });
+        this.addItem('watchLater', { 'authId': userId, 'videoId': this.video.id }).subscribe(
+          response => {
+            window.alert('Adicionado à lista de assistir depois')
+          },
+          error => {
+            console.error('Erro ao adicionar à lista de assistir depois:', error);
+          }
+        );
       }
     });
   }
 
-  // Função para remover o vídeo da lista "assistir depois"
-  naoassistirDepois(): void {
-    this.usuarioAssisteDepois = false;
-    this.deleteItem('watchLater', this.video.id);
-  }
-
-  // Função para desfavoritar o vídeo
-  desfavoritar(): void {
-    this.usuarioFavoritou = false;
-    this.deleteItem('favorites', this.video.id);
-  }
 
   // Método para adicionar um item (vídeo) a qualquer endpoint
   addItem(endpoint: string, data: any): Observable<any> {
@@ -93,14 +92,6 @@ export class VideoPageComponent implements OnInit {
     return this.http.patch(url, data); // Altere de PUT para PATCH
   }
 
-
-  // Método para remover um item (vídeo) no banco de dados
-  deleteItem(endpoint: string, id: number): Observable<any> {
-    const url = `${this.baseUrl}/${endpoint}/${id}`;
-    return this.http.delete(url);
-  }
-
-
   getEmbedUrl(url: string): SafeResourceUrl {
     const videoId = this.extractYoutubeId(url);
     const embedUrl = `https://www.youtube.com/embed/${videoId}`;
@@ -112,4 +103,6 @@ export class VideoPageComponent implements OnInit {
     const match = url.match(regExp);
     return match ? match[1] : null;
   }
+
+
 }
