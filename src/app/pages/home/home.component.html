@@ -1,10 +1,10 @@
 
 
-<div class="flex gap-5 py-7 justify-center items-center text-white">
-  <button class=" bg-slate-800 rounded-md p-2 focus:bg-slate-600" (click)="filtrarFavoritos()" >
+<div class="flex gap-5 py-7 justify-center items-center text-white inria-sans-regular">
+  <button class=" bg-purple-800 rounded-md p-2 focus:bg-purple-600" (click)="filtrarFavoritos()" >
     Favoritos
   </button>
-  <button class=" bg-slate-800 rounded-md p-2  focus:bg-slate-600" (click)="filtrarMaisTarde()">
+  <button class=" bg-purple-800 rounded-md p-2  focus:bg-purple-600" (click)="filtrarMaisTarde()">
     Assistir Mais Tarde
   </button>
 </div>
@@ -21,8 +21,8 @@
             <div class="w-80 h-44 overflow-hidden rounded-lg flex justify-center items-center">
               <img src="{{video.thumbnail}}" alt="thumbnail" class="w-full h-auto">
             </div>
-            <h3 class="font-bold max-w-80">{{ video.title }}</h3>
-            <p class="text-xs max-w-80">{{ video.description }}</p>
+            <h3 class="font-bold max-w-80 roboto-bold">{{ video.title }}</h3>
+            <p class="text-xs max-w-80 inria-sans-regular">{{ video.description }}</p>
           </div>
         </a>
       </li>

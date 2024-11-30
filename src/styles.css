@@ -7,6 +7,9 @@
 /* Order */
 @layer reset, primeng;
 
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Press+Start+2P&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Source+Code+Pro:wght@600&family=Ubuntu:wght@300;400;500&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Outfit:wght@100..900&family=Press+Start+2P&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Source+Code+Pro:wght@600&family=Ubuntu:wght@300;400;500&display=swap');
 /* Reset CSS */
 @layer reset {
   .p-toolbar {
@@ -28,14 +31,22 @@
     padding-bottom: 0.5rem;
   }
 }
-
 .size{
   padding-left: 5%;
   padding-right: 5%;
 }
 
-
-
 body{
   background-color: #1E1E1E;
+}
+.roboto-bold {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.inria-sans-regular {
+  font-family: "Inria Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }

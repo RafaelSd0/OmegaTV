@@ -1,6 +1,6 @@
 <div *ngIf="video" class="flex justify-center items-center">
   <iframe
-    class="w-full h-screen"
+    class="w-full h-64 md:h-screen"
     [src]="getEmbedUrl(video.url)"
     frameborder="0"
     allowfullscreen>
@@ -9,23 +9,20 @@
 <div class="size text-white pb-10">
   <br>
   <div>
-    <h1 class="  text-xl sm:text-2xl md:text-3xl xl:text-4xl">{{video.title}}</h1>
-    <div>
-      <button (click)="favoritar()" >Favoritar</button>
-      <button (click)="assistirDepois()" >Assistir depois</button>
-    </div>
+    <h1 class="  text-xl sm:text-2xl md:text-3xl xl:text-4xl roboto-bold">{{video.title}}</h1>
   </div>
   <br>
-  <div class=" bg-slate-900 rounded w-full py-3">
-    <p class=" pl-5 text-base sm:text-sm md:text-md xl:text-lg">{{video.description}}</p>
+  <div class="inria-sans-regular flex gap-3 max-h-10 ">
+    <button (click)="favoritar()" class=" bg-purple-800 rounded-md p-2 focus:bg-purple-600 " >Favoritar</button>
+    <button (click)="assistirDepois()" class=" bg-purple-800 rounded-md p-2 focus:bg-purple-600 " >Assistir depois</button>
+  </div>
+
+  <br>
+  <div class=" bg-slate-900 rounded w-full py-3 inria-sans-regular">
+    <p class=" pl-5 text-base sm:text-sm md:text-md xl:text-lg ">{{video.description}}</p>
     <br>
     <p class="pl-5 text-base sm:text-sm md:text-md xl:text-lg">Visualizações: {{video.views}} </p>
     <p class="pl-5 text-base sm:text-sm md:text-md xl:text-lg">Data de Upload: {{video.uploadedAt}}</p>
   </div>
 
-
-
-
-
 </div>
-

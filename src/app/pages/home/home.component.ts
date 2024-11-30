@@ -14,44 +14,43 @@ import { AuthService } from '@auth0/auth0-angular';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
-  videos: any[] = []; // Armazenar os vídeos
-  pesquisa: string = ''; // Variável para armazenar o termo de pesquisa
+  videos: any[] = [];
+  pesquisa: string = '';
   isAuthenticated: boolean = false;
   user: any;
 
   constructor(private http: HttpClient, private navegationService: NavegationService, public auth: AuthService) {}
 
   ngOnInit(): void {
-    // Carregar os vídeos quando o componente for inicializado
+
     this.getVideos()
     this.navegationService.getFavorites();
     this.navegationService.getWatchLater();
 
     // Escutar mudanças no nome da pesquisa
-    this.pesquisa = this.navegationService.getName(); // Inicializa com o valor atual
-    console.log('Pesquisa inicial:', this.pesquisa); // Logando o valor inicial
+    this.pesquisa = this.navegationService.getName();
+    console.log('Pesquisa inicial:', this.pesquisa);
 
     this.navegationService.nameChanged.subscribe(newName => {
-      console.log('Novo nome de pesquisa recebido:', newName); // Verificando o nome recebido
-      this.pesquisa = newName; // Atualiza a pesquisa quando o valor mudar
-      this.pesquisarPorNome(); // Chama a função de filtro
+      console.log('Novo nome de pesquisa recebido:', newName);
+      this.pesquisa = newName;
+      this.pesquisarPorNome();
       if(this.pesquisa === ''){
         this.getVideos()
       }
     });
 
     this.auth.isAuthenticated$.subscribe((authenticated) => {
-      this.isAuthenticated = authenticated; // Atualiza o estado de autenticação
+      this.isAuthenticated = authenticated;
       console.log('Usuário autenticado:', this.isAuthenticated);
     });
 
-    // Obtém os dados do usuário autenticado
     this.auth.user$.subscribe({
       next: (profile) => {
-        this.user = profile; // Armazena os dados do usuário
+        this.user = profile;
         console.log('Usuário autenticado:', this.user);
         if (this.user) {
-          this.addUserToDatabase(this.user); // Adiciona ao banco de dados
+          this.addUserToDatabase(this.user);
         }
       },
       error: (err) => {
@@ -61,8 +60,6 @@ export class HomeComponent implements OnInit {
 
   }
 
-
-  // Adiciona o usuário ao db.json
   addUserToDatabase(user: any): void {
     this.http.post('http://localhost:3000/users', user).subscribe({
       next: (response) => {
@@ -77,18 +74,18 @@ export class HomeComponent implements OnInit {
   getVideos(){
     this.http.get<any[]>('http://localhost:3000/videos').subscribe({
       next: (data) => {
-        this.videos = data; // Armazena os vídeos
-        console.log('Vídeos carregados:', this.videos); // Adicionando log
-        this.pesquisarPorNome(); // Chama a função de filtro logo após carregar os vídeos
+        this.videos = data;
+        console.log('Vídeos carregados:', this.videos);
+        this.pesquisarPorNome();
       },
       error: (err) => {
-        console.error('Erro ao carregar vídeos:', err); // Trata erros
+        console.error('Erro ao carregar vídeos:', err);
       }
     });
   }
 
   pesquisarPorNome(): void {
-    console.log('Pesquisando por nome:', this.pesquisa); // Verificando a pesquisa atual
+    console.log('Pesquisando por nome:', this.pesquisa);
     if (this.pesquisa) {
       this.videos = this.videos.filter(video =>
         video.title.toLowerCase().includes(this.pesquisa.toLowerCase())
@@ -97,22 +94,21 @@ export class HomeComponent implements OnInit {
   }
 
   setVideo(video: any): void {
-    this.navegationService.setVideo(video); // Armazena o vídeo no serviço
+    this.navegationService.setVideo(video);
   }
 
   filtrarFavoritos(): void {
     if (this.isAuthenticated) {
       this.auth.user$.subscribe(user => {
-        const userId = user?.sub; // Obtém o ID do usuário autenticado
+        const userId = user?.sub;
         if (!userId) {
           window.alert("Erro: usuário não autenticado.");
           return;
         }
 
-        // Aguarda a lista de favoritos ser carregada antes de filtrar
-        this.navegationService.getFavorites(); // Certifique-se de que a lista está carregada antes de filtrar
 
-        // Agora filtramos os vídeos com base no usuário autenticado
+        this.navegationService.getFavorites();
+
         this.videos = this.videos.filter(video =>
           this.navegationService.listaFavoritos.some(fav =>
             fav.authId === userId && fav.videoId === video.id
@@ -130,16 +126,14 @@ export class HomeComponent implements OnInit {
   filtrarMaisTarde(){
     if (this.isAuthenticated) {
       this.auth.user$.subscribe(user => {
-        const userId = user?.sub; // Obtém o ID do usuário autenticado
+        const userId = user?.sub;
         if (!userId) {
           window.alert("Erro: usuário não autenticado.");
           return;
         }
 
-        // Aguarda a lista de favoritos ser carregada antes de filtrar
-        this.navegationService.getWatchLater(); // Certifique-se de que a lista está carregada antes de filtrar
+        this.navegationService.getWatchLater();
 
-        // Agora filtramos os vídeos com base no usuário autenticado
         this.videos = this.videos.filter(video =>
           this.navegationService.listaAssistir.some(fav =>
             fav.authId === userId && fav.videoId === video.id

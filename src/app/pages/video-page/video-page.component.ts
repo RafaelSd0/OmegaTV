@@ -33,9 +33,8 @@ export class VideoPageComponent implements OnInit {
 
     this.auth.isAuthenticated$.subscribe(isAuthenticated => {
       if (isAuthenticated) {
-        const novoTotalDeViews = this.video.views + 1; // Calcula o novo total de visualizações
+        const novoTotalDeViews = this.video.views + 1;
         this.updateItem('videos', this.video.id, { views: novoTotalDeViews }).subscribe(() => {
-          // Atualiza localmente o valor para refletir o que foi enviado
           this.video.views = novoTotalDeViews;
         });
       }
@@ -43,12 +42,10 @@ export class VideoPageComponent implements OnInit {
 
   }
 
-  // Função para favoritar o vídeo
   favoritar(): void {
     this.auth.user$.subscribe(user => {
-      const userId = user?.sub; // Obtém o ID do usuário (sub) do Auth0
+      const userId = user?.sub;
       if (userId) {
-        // Adiciona o vídeo aos favoritos
         this.addItem('favorites', {  'authId': userId, 'videoId': this.video.id }).subscribe(
           response => {
             window.alert('Adicionado à lista de favoritos');
@@ -61,12 +58,10 @@ export class VideoPageComponent implements OnInit {
     });
   }
 
-  // Função para adicionar o vídeo à lista de "assistir depois"
   assistirDepois(): void {
     this.auth.user$.subscribe(user => {
-      const userId = user?.sub; // Obtém o ID do usuário (sub) do Auth0
+      const userId = user?.sub;
       if (userId) {
-        // Adiciona o vídeo à lista "assistir depois"
         this.addItem('watchLater', { 'authId': userId, 'videoId': this.video.id }).subscribe(
           response => {
             window.alert('Adicionado à lista de assistir depois')
@@ -79,19 +74,18 @@ export class VideoPageComponent implements OnInit {
     });
   }
 
-
-  // Método para adicionar um item (vídeo) a qualquer endpoint
+  // adicionar e modificar dados do db.json
   addItem(endpoint: string, data: any): Observable<any> {
     const url = `${this.baseUrl}/${endpoint}`;
     return this.http.post(url, data);
   }
 
-  // Método para atualizar um item (vídeo) no banco de dados
   updateItem(endpoint: string, id: string | number, data: any): Observable<any> {
     const url = `${this.baseUrl}/${endpoint}/${id}`;
-    return this.http.patch(url, data); // Altere de PUT para PATCH
+    return this.http.patch(url, data);
   }
 
+  // funções para colocar video no Iframe
   getEmbedUrl(url: string): SafeResourceUrl {
     const videoId = this.extractYoutubeId(url);
     const embedUrl = `https://www.youtube.com/embed/${videoId}`;

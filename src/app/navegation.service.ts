@@ -5,8 +5,9 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class NavegationService {
-  private nameSubject = new BehaviorSubject<string>(''); // Inicializa o nome da pesquisa
-  nameChanged = this.nameSubject.asObservable(); // Observable para ser escutado
+  
+  private nameSubject = new BehaviorSubject<string>('');
+  nameChanged = this.nameSubject.asObservable();
   listaAssistir: any[] = [];
   listaFavoritos: any[] =[];
   private video: any;
@@ -17,12 +18,12 @@ export class NavegationService {
   ) {}
 
   setName(name: string): void {
-    console.log('Setando novo nome: ', name); // Adicionando log
-    this.nameSubject.next(name); // Atualiza o valor da pesquisa
+    console.log('Setando novo nome: ', name);
+    this.nameSubject.next(name);
   }
 
   getName(): string {
-    return this.nameSubject.getValue(); // Retorna o valor atual
+    return this.nameSubject.getValue();
   }
 
   setVideo(video: any): void {
@@ -33,29 +34,26 @@ export class NavegationService {
     return this.video;
   }
 
-    // Busca todos os objetos do endpoint "watchLater"
-    getWatchLater(){
-      this.http.get<any[]>('http://localhost:3000/watchLater').subscribe({
-        next: data => {
-          this.listaAssistir = data;
-        },
-        error: (err) => {
-          console.error('Erro ao carregar assistir:', err); // Trata erros
-        }
-      })
-    }
+  getWatchLater(){
+    this.http.get<any[]>('http://localhost:3000/watchLater').subscribe({
+      next: data => {
+        this.listaAssistir = data;
+      },
+      error: (err) => {
+        console.error('Erro ao carregar assistir:', err);
+      }
+    })
+  }
 
-    // Busca todos os objetos do endpoint "favorites"
-    getFavorites(){
-
-      this.http.get<any[]>('http://localhost:3000/favorites').subscribe({
-        next: data => {
-          this.listaFavoritos = data;
-        },
-        error: (err) => {
-          console.error('Erro ao carregar favoritos:', err); // Trata erros
-        }
-      })
-    }
+  getFavorites(){
+    this.http.get<any[]>('http://localhost:3000/favorites').subscribe({
+      next: data => {
+        this.listaFavoritos = data;
+      },
+      error: (err) => {
+        console.error('Erro ao carregar favoritos:', err);
+      }
+    })
+  }
 
 }
