@@ -8,6 +8,7 @@ import { RouterLinkActive } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NavegationService } from '../../navegation.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -19,7 +20,7 @@ export class HeaderComponent {
   menuAberto: boolean = false;
   profile!: User | null | undefined;
 
-  constructor(public auth: AuthService, @Inject(DOCUMENT) private document: Document, private navegationServide:NavegationService) {}
+  constructor(public auth: AuthService, @Inject(DOCUMENT) private document: Document, private navegationServide:NavegationService, private router: Router) {}
 
   ngOnInit(): void {
 
@@ -28,6 +29,12 @@ export class HeaderComponent {
     this.profile = profile;
 
     });
+  }
+
+  navigateTo(event: KeyboardEvent): void {
+    if (event.key === 'Enter') {
+      this.router.navigate(['/home']);
+    }
   }
 
   login() {

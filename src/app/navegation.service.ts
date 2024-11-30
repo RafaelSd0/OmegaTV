@@ -25,4 +25,14 @@ export class NavegationService {
   getVideo(): any {
     return this.video;
   }
+
+  getAllUsers(){
+
+  }
+
+  getAllFavorites(){
+
+  }
+
+
 }

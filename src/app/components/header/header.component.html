@@ -9,7 +9,7 @@
       </a>
   </div>
   <div class="p-toolbar-group-center">
-    <input pInputText placeholder="Pesquisar" class="p-0 sm:py-2  sm:px-3" (input)="setName($event)" />
+    <input pInputText placeholder="Pesquisar" class="p-0 sm:py-2  sm:px-3" (input)="setName($event)" (keydown)="navigateTo($event)" />
   </div>
   <div class="p-toolbar-group-end flex gap-5 " >
 
