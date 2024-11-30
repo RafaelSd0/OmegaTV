@@ -1,7 +1,7 @@
 
 # OmegaTV
 
-**OmegaTV** é um aplicativo desenvolvido com Angular que tem como objetivo [descrição breve do propósito do projeto].
+**OmegaTV** é um aplicativo desenvolvido com Angular que tem como objetivo ser uma plataforma de streaming de videos.
 
 ## 🚀 Tecnologias
 
@@ -10,12 +10,6 @@
 - **PrimeNG** (v17.18.12): Biblioteca de componentes UI.
 - **TailwindCSS** (v3.4.15): Framework CSS utilitário para estilização.
 - **JSON Server** (v1.0.0-beta.3): Servidor fake para simulação de API.
-
-## 🎯 Funcionalidades
-
-- [Funcionalidade 1]
-- [Funcionalidade 2]
-- [Funcionalidade 3]
 
 ## 📦 Pré-requisitos
 
@@ -30,7 +24,7 @@ Certifique-se de ter instalado:
 1. Clone este repositório:
 
    ```bash
-   git clone <URL_DO_REPOSITORIO>
+   git clone https://github.com/RafaelSd0/OmegaTV
    cd OmegaTV
    ```
 
@@ -58,22 +52,3 @@ Certifique-se de ter instalado:
   npm run json-server
   ```
 
-## 🛠️ Build
-
-Para gerar uma versão de produção:
-
-```bash
-npm run build
-```
-
-Os arquivos de produção estarão na pasta `dist/`.
-
-## 🚧 Estrutura do projeto
-
-```plaintext
-src/
-├── app/                 # Componentes e módulos principais
-├── assets/              # Recursos estáticos (imagens, fontes, etc.)
-├── environments/        # Configurações de ambiente
-└── styles.css           # Estilizações globais
-```
