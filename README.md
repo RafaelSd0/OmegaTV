@@ -1,27 +1,79 @@
+
 # OmegaTV
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.10.
+**OmegaTV** é um aplicativo desenvolvido com Angular que tem como objetivo [descrição breve do propósito do projeto].
 
-## Development server
+## 🚀 Tecnologias
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Angular** (v18.2.10): Framework principal para desenvolvimento front-end.
+- **Auth0 Angular** (v2.2.3): Implementação de autenticação e controle de acesso.
+- **PrimeNG** (v17.18.12): Biblioteca de componentes UI.
+- **TailwindCSS** (v3.4.15): Framework CSS utilitário para estilização.
+- **JSON Server** (v1.0.0-beta.3): Servidor fake para simulação de API.
 
-## Code scaffolding
+## 🎯 Funcionalidades
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- [Funcionalidade 1]
+- [Funcionalidade 2]
+- [Funcionalidade 3]
 
-## Build
+## 📦 Pré-requisitos
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Certifique-se de ter instalado:
 
-## Running unit tests
+- Node.js (v16 ou superior)
+- Angular CLI (v18.2.10 ou superior)
+- npm (v9 ou superior)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 🔧 Instalação
 
-## Running end-to-end tests
+1. Clone este repositório:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+   ```bash
+   git clone <URL_DO_REPOSITORIO>
+   cd OmegaTV
+   ```
 
-## Further help
+2. Instale as dependências:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+   ```bash
+   npm install
+   ```
+
+3. Configure o Auth0 (opcional, se necessário).
+
+## ⚙️ Como executar
+
+- Para iniciar o servidor de desenvolvimento:
+
+  ```bash
+  npm start
+  ```
+
+  Acesse `http://localhost:4200/` no navegador.
+
+- Para rodar o servidor JSON (simulação de API):
+
+  ```bash
+  npm run json-server
+  ```
+
+## 🛠️ Build
+
+Para gerar uma versão de produção:
+
+```bash
+npm run build
+```
+
+Os arquivos de produção estarão na pasta `dist/`.
+
+## 🚧 Estrutura do projeto
+
+```plaintext
+src/
+├── app/                 # Componentes e módulos principais
+├── assets/              # Recursos estáticos (imagens, fontes, etc.)
+├── environments/        # Configurações de ambiente
+└── styles.css           # Estilizações globais
+```
