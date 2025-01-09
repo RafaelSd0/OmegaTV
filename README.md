@@ -49,6 +49,6 @@ Certifique-se de ter instalado:
 - Para rodar o servidor JSON (simulação de API):
 
   ```bash
-  npm run json-server
+  json-server --watch db.json
   ```
 
