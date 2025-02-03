@@ -9,22 +9,18 @@
       </a>
   </div>
   <div class="p-toolbar-group-center">
-    <input pInputText placeholder="Pesquisar" class="p-0 sm:py-2  sm:px-3" (input)="setName($event)" (keydown)="navigateTo($event)" />
+    <input pInputText placeholder="Pesquisar" class="p-0 sm:py-2  sm:px-3"  />
   </div>
   <div class="p-toolbar-group-end flex gap-5 " >
 
     <button
-    *ngIf="!(auth.isAuthenticated$ | async)"
-    (click)="login()"
     class=" bg-blue-600 rounded-full py-1 px-2 sm:py-2 sm:px-3 text-white hover:bg-blue-700 transition-transform duration-700 ease-in-out text-xs sm:text-base ">Entrar</button>
 
-    <div *ngIf="auth.user$ | async as user" >
-      <img [src]="profile?.picture" alt="{{ profile?.name }}" class=" rounded-full h-6 sm:h-8" />
+    <div >
+      <img  class=" rounded-full h-6 sm:h-8" />
     </div>
 
     <button
-    *ngIf="auth.isAuthenticated$ | async"
-    (click)="logout()"
     class=" bg-red-600 rounded-full py-1 px-2 sm:py-2 sm:px-3 text-white hover:bg-red-700 transition-transform duration-700 ease-in-out text-xs sm:text-base ">Sair</button>
 
 

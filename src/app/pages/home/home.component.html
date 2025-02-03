@@ -1,10 +1,10 @@
 
 
 <div class="flex gap-5 py-7 justify-center items-center text-white inria-sans-regular">
-  <button class=" bg-purple-800 rounded-md p-2 focus:bg-purple-600" (click)="filtrarFavoritos()" >
+  <button class=" bg-purple-800 rounded-md p-2 focus:bg-purple-600" >
     Favoritos
   </button>
-  <button class=" bg-purple-800 rounded-md p-2  focus:bg-purple-600" (click)="filtrarMaisTarde()">
+  <button class=" bg-purple-800 rounded-md p-2  focus:bg-purple-600" >
     Assistir Mais Tarde
   </button>
 </div>
@@ -13,16 +13,16 @@
 
 
 
-  <div *ngIf="videos.length > 0; else loading">
+  <div >
     <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-      <li *ngFor="let video of videos" >
-        <a [routerLink]="'/video'" (click)="setVideo(video)">
+      <li >
+        <a >
           <div>
             <div class="w-80 h-44 overflow-hidden rounded-lg flex justify-center items-center">
-              <img src="{{video.thumbnail}}" alt="thumbnail" class="w-full h-auto">
+              <img  alt="thumbnail" class="w-full h-auto">
             </div>
-            <h3 class="font-bold max-w-80 roboto-bold">{{ video.title }}</h3>
-            <p class="text-xs max-w-80 inria-sans-regular">{{ video.description }}</p>
+            <h3 class="font-bold max-w-80 roboto-bold">titulo</h3>
+            <p class="text-xs max-w-80 inria-sans-regular">descriçaõ</p>
           </div>
         </a>
       </li>
